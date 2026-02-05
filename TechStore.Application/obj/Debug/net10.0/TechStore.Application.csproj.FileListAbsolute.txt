@@ -1,0 +1,5 @@
+/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/obj/Debug/net10.0/TechStore.Application.csproj.AssemblyReference.cache
+/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/obj/Debug/net10.0/TechStore.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/obj/Debug/net10.0/TechStore.Application.AssemblyInfoInputs.cache
+/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/obj/Debug/net10.0/TechStore.Application.AssemblyInfo.cs
+/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/obj/Debug/net10.0/TechStore.Application.csproj.CoreCompileInputs.cache
