@@ -12,7 +12,7 @@ CREATE TABLE Client.Client_tb(
     CpfClient VARCHAR(11) NOT NULL UNIQUE,
     NameClient VARCHAR(100),
     BirthDateClient DATE,
-    PhoneClient VARCHAR(15),
+    PhoneClient VARCHAR(16),
     EmailClient VARCHAR(254) UNIQUE,
     PasswordClient VARCHAR(255)
 );
