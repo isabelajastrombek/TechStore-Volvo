@@ -9,3 +9,4 @@
 /Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/refint/TechStore.Domain.dll
 /Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.pdb
 /Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/ref/TechStore.Domain.dll
+/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.sourcelink.json

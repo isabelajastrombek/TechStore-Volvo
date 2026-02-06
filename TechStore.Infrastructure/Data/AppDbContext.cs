@@ -8,45 +8,27 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options) { }
 
-    public DbSet<Categoria> Categorias { get; set; }
-    public DbSet<Produto> Produtos { get; set; }
-    public DbSet<Pedido> Pedidos { get; set; }
-    public DbSet<ItemPedido> ItensPedido { get; set; }
-
     public DbSet<Cliente> Clientes { get; set; }
     public DbSet<Endereco> Enderecos { get; set; }
-    public DbSet<Cartao> Cartoes { get; set; }
-
+    public DbSet<Categoria> Categorias { get; set; }
+    public DbSet<Produto> Produtos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Cliente>()
+            .ToTable("Cliente_tb", "Cliente")
+            .HasKey(c => c.IdCliente);
+
+        modelBuilder.Entity<Endereco>()
+            .ToTable("Endereco_tb", "Cliente");
 
         modelBuilder.Entity<Categoria>()
-            .HasKey(c => c.Id);
+            .ToTable("Categoria_tb", "Catalogo");
 
         modelBuilder.Entity<Produto>()
-            .HasKey(p => p.Id);
+            .ToTable("Produto_tb", "Catalogo");
 
-        modelBuilder.Entity<Produto>()
-            .HasOne(p => p.Categoria)
-            .WithMany(c => c.Produtos)
-            .HasForeignKey(p => p.CategoriaId);
-
-        modelBuilder.Entity<Pedido>()
-            .HasKey(p => p.Id);
-
-        modelBuilder.Entity<ItemPedido>()
-            .HasKey(i => i.Id);
-
-        modelBuilder.Entity<ItemPedido>()
-            .HasOne(i => i.Pedido)
-            .WithMany(p => p.Itens)
-            .HasForeignKey(i => i.PedidoId);
-
-        modelBuilder.Entity<ItemPedido>()
-            .HasOne(i => i.Produto)
-            .WithMany()
-            .HasForeignKey(i => i.ProdutoId);
+        base.OnModelCreating(modelBuilder);
     }
+
 }
