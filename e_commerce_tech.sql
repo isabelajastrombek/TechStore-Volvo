@@ -4,104 +4,104 @@ GO
 USE e_commerce_tech;
 GO
 
-CREATE SCHEMA Cliente;
+CREATE SCHEMA Client;
 GO
 
-CREATE TABLE Cliente.Cliente_tb(
-    IdCliente INT PRIMARY KEY IDENTITY(1,1),
-    CpfCliente VARCHAR(11) NOT NULL UNIQUE,
-    NomeCliente VARCHAR(100),
-    DataNascimentoCliente DATE,
-    EmailCliente VARCHAR(254) UNIQUE,
-    SenhaCliente VARCHAR(255)
+CREATE TABLE Client.Client_tb(
+    IdClient INT PRIMARY KEY IDENTITY(1,1),
+    CpfClient VARCHAR(11) NOT NULL UNIQUE,
+    NameClient VARCHAR(100),
+    BirthDateClient DATE,
+    EmailClient VARCHAR(254) UNIQUE,
+    PasswordClient VARCHAR(255)
 );
 GO
 
-CREATE TABLE Cliente.Endereco_tb(
-    IdEndereco INT PRIMARY KEY IDENTITY(1,1),
-    LogradouroEndereco VARCHAR(60),
-    NumeroEndereco VARCHAR(6),
-    ComplementoEndereco VARCHAR(20),
-    CidadeEndereco VARCHAR(60),
-    EstadoEndereco VARCHAR(2),
-    TipoEndereco VARCHAR(20),
-    IdCliente INT NOT NULL,
-    CONSTRAINT FK_Endereco_Cliente FOREIGN KEY (IdCliente) REFERENCES Cliente.Cliente_tb(IdCliente)
-);
-GO
-
-
-
-CREATE SCHEMA Catalogo;
-GO
-
-CREATE TABLE Catalogo.Categoria_tb(
-    IdCategoria INT PRIMARY KEY IDENTITY(1,1),
-    NomeCategoria VARCHAR(100)
-);
-GO
-
-CREATE TABLE Catalogo.Produto_tb(
-    IdProduto INT PRIMARY KEY IDENTITY(1,1),
-    NomeProduto VARCHAR(200) NOT NULL,
-    PrecoProduto MONEY NOT NULL,
-    EstoqueProduto INT NOT NULL DEFAULT 0,
-    IdCategoria INT NOT NULL,
-    DescricaoProduto VARCHAR(500),
-    EspecificacaoProduto NVARCHAR(MAX),
-    MarcaProduto VARCHAR(50),
-    CONSTRAINT FK_Produto_Categoria FOREIGN KEY (IdCategoria) REFERENCES Catalogo.Categoria_tb(IdCategoria),
-    CONSTRAINT CHK_JSON_Valido CHECK (ISJSON(EspecificacaoProduto) > 0)
-
+CREATE TABLE Client.Address_tb(
+    IdAddress INT PRIMARY KEY IDENTITY(1,1),
+    StreetAddress VARCHAR(60),
+    NumberAddress VARCHAR(6),
+    ComplementAddress VARCHAR(20),
+    CityAddress VARCHAR(60),
+    StateAddress VARCHAR(2),
+    TypeAddress VARCHAR(20),
+    IdClient INT NOT NULL,
+    CONSTRAINT FK_Address_Client FOREIGN KEY (IdClient) REFERENCES Client.Client_tb(IdClient)
 );
 GO
 
 
 
-
-
-CREATE SCHEMA Vendas;
+CREATE SCHEMA Catalog;
 GO
 
-CREATE TABLE Vendas.Cartao_tb(
-    IdCartao INT PRIMARY KEY IDENTITY(1,1),
-    NumeroMascarado VARCHAR(20),  
-    TokenPagamento VARCHAR(MAX),  
-    CpfCartao VARCHAR(11) NOT NULL,
-    DataExpiracaoCartao DATE NOT NULL,
-    TipoCartao VARCHAR(10) NOT NULL,
-    ApelidoCartao VARCHAR(20),
-    NomeNoCartao VARCHAR(50) NOT NULL,
-    IdCliente INT NOT NULL,
-    CONSTRAINT FK_Cartao_Cliente FOREIGN KEY (IdCliente) REFERENCES Cliente.Cliente_tb(IdCliente)
+CREATE TABLE Catalog.Category_tb(
+    IdCategory INT PRIMARY KEY IDENTITY(1,1),
+    NameCategory VARCHAR(100)
+);
+GO
+
+CREATE TABLE Catalog.Product_tb(
+    IdProduct INT PRIMARY KEY IDENTITY(1,1),
+    NameProduct VARCHAR(200) NOT NULL,
+    PriceProduct MONEY NOT NULL,
+    StockProduct INT NOT NULL DEFAULT 0,
+    IdCategory INT NOT NULL,
+    DescriptionProduct VARCHAR(500),
+    SpecsProduct NVARCHAR(MAX),
+    BrandProduct VARCHAR(50),
+    CONSTRAINT FK_Product_Category FOREIGN KEY (IdCategory) REFERENCES Catalog.Category_tb(IdCategory),
+    CONSTRAINT CHK_JSON_Valid CHECK (ISJSON(SpecsProduct) > 0)
 
 );
 GO
 
-CREATE TABLE Vendas.Pedido_tb(
-    IdPedido INT PRIMARY KEY IDENTITY(1,1),
-    DataPedido DATETIME2 DEFAULT GETDATE(),
-    IdCliente INT,
-    StatusPedido VARCHAR(50),
-    DataDeEntrega DATE,
-    idCartao INT,
-    idEndereco INT,
-    ValorTotal MONEY,
-    ValorFrete MONEY,
-    CONSTRAINT FK_Pedido_Cliente FOREIGN KEY (IdCliente) REFERENCES Cliente.Cliente_tb(IdCliente),
-    CONSTRAINT FK_Pedido_Endereco FOREIGN KEY (IdEndereco) REFERENCES Cliente.Endereco_tb(IdEndereco),
-    CONSTRAINT FK_Pedido_Cartao FOREIGN KEY (IdCartao) REFERENCES Vendas.Cartao_tb(IdCartao)
+
+
+
+
+CREATE SCHEMA Sales;
+GO
+
+CREATE TABLE Sales.Card_tb(
+    IdCard INT PRIMARY KEY IDENTITY(1,1),
+    MaskedNumber VARCHAR(20),  
+    PaymentToken VARCHAR(MAX),  
+    CpfCard VARCHAR(11) NOT NULL,
+    ExpDateCard DATE NOT NULL,
+    TypeCard VARCHAR(10) NOT NULL,
+    NicknameCard VARCHAR(20),
+    NameOnCard VARCHAR(50) NOT NULL,
+    IdClient INT NOT NULL,
+    CONSTRAINT FK_Card_Client FOREIGN KEY (IdClient) REFERENCES Client.Client_tb(IdClient)
+
 );
 GO
 
-CREATE TABLE Vendas.ItemPedido_tb(
-    IdItemPedido INT PRIMARY KEY IDENTITY(1,1),
-    IdProduto INT,
-    QuantidadeItemPedido INT,
-    PrecoUnitarioItem MONEY,
-    IdPedido INT,
-    CONSTRAINT FK_Item_Pedido FOREIGN KEY (IdPedido) REFERENCES Vendas.Pedido_tb(IdPedido),
-    CONSTRAINT FK_Item_Produto FOREIGN KEY (IdProduto) REFERENCES Catalogo.Produto_tb(IdProduto)
+CREATE TABLE Sales.Order_tb(
+    IdOrder INT PRIMARY KEY IDENTITY(1,1),
+    DateOrder DATETIME2 DEFAULT GETDATE(),
+    IdClient INT,
+    StatusOrder VARCHAR(50),
+    DeliveryDate DATE,
+    idCard INT,
+    idAddress INT,
+    TotalPrice MONEY,
+    TotalShipping MONEY,
+    CONSTRAINT FK_Order_Client FOREIGN KEY (IdClient) REFERENCES Client.Client_tb(IdClient),
+    CONSTRAINT FK_Order_Address FOREIGN KEY (IdAddress) REFERENCES Client.Address_tb(IdAddress),
+    CONSTRAINT FK_Order_Card FOREIGN KEY (IdCard) REFERENCES Sales.Card_tb(IdCard)
+);
+GO
+
+CREATE TABLE Sales.ItemOrder_tb(
+    IdItemOrder INT PRIMARY KEY IDENTITY(1,1),
+    IdProduct INT,
+    QtyItemOrder INT,
+    PriceUnitItem MONEY,
+    IdOrder INT,
+    CONSTRAINT FK_Item_Order FOREIGN KEY (IdOrder) REFERENCES Sales.Order_tb(IdOrder),
+    CONSTRAINT FK_Item_Product FOREIGN KEY (IdProduct) REFERENCES Catalog.Product_tb(IdProduct)
 );
 GO
 
