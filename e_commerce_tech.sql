@@ -13,7 +13,8 @@ CREATE TABLE Client.Client_tb(
     NameClient VARCHAR(100),
     BirthDateClient DATE,
     EmailClient VARCHAR(254) UNIQUE,
-    PasswordClient VARCHAR(255)
+    PasswordClient VARCHAR(255),
+    PhoneClient VARCHAR(16)
 );
 GO
 
