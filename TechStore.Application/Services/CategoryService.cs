@@ -5,17 +5,17 @@ using TechStore.Infrastructure.Data;
 
 namespace TechStore.Application.Services;
 
-public class CategoriaService : ICategoriaService
+public class CategoryService : ICategoryService
 {
     private readonly AppDbContext _context;
 
-    public CategoriaService(AppDbContext context)
+    public CategoryService(AppDbContext context)
     {
         _context = context;
     }
 
-    public async Task<IEnumerable<Categoria>> GetAllAsync()
+    public async Task<IEnumerable<Category>> GetAllAsync()
     {
-        return await _context.Categorias.ToListAsync();
+        return await _context.Categories.ToListAsync();
     }
 }

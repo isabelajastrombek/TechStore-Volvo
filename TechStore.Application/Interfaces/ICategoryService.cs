@@ -2,7 +2,7 @@ using TechStore.Domain.Entities;
 
 namespace TechStore.Application.Interfaces;
 
-public interface ICategoriaService
+public interface ICategoryService
 {
-    Task<IEnumerable<Categoria>> GetAllAsync();
+    Task<IEnumerable<Category>> GetAllAsync();
 }

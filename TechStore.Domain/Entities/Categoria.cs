@@ -1,9 +1,9 @@
 namespace TechStore.Domain.Entities;
 
-public class Categoria
+public class Category
 {
-    public int Id { get; set; }
-    public string Nome { get; set; }
+    public int IdCategory { get; set; }
+    public string NameCategory { get; set; }
 
-    public ICollection<Produto> Produtos { get; set; }
+    public ICollection<Product> Products { get; set; }
 }
