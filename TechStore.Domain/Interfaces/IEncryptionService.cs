@@ -1,4 +1,4 @@
-namespace TechStore.Application.Interfaces;
+namespace TechStore.Domain.Interfaces;
 
 public interface IEncryptionService
 {

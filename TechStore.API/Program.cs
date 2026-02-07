@@ -1,5 +1,8 @@
 using TechStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using TechStore.Infrastructure.Data;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 

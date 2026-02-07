@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TechStore.Domain\TechStore.Domain.csproj" />
-    <ProjectReference Include="..\TechStore.Application\TechStore.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

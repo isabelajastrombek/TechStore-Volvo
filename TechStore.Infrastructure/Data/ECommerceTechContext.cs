@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using TechStore.Domain.Entities;
 
-namespace TechStore.Domain.Entities;
+
+namespace TechStore.Infrastructure.Data;
 
 public partial class ECommerceTechContext : DbContext
 {
