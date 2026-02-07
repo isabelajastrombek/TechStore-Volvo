@@ -1,8 +1,8 @@
-using TechStore.Domain.Entities;
+// using TechStore.Domain.Entities;
 
-namespace TechStore.Application.Interfaces;
+// namespace TechStore.Application.Interfaces;
 
-public interface ICategoryService
-{
-    Task<IEnumerable<Category>> GetAllAsync();
-}
+// public interface ICategoryService
+// {
+//     Task<IEnumerable<Category>> GetAllAsync();
+// }
