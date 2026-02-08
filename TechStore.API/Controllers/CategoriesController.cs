@@ -1,36 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TechStore.Infrastructure.Data;
+using TechStore.Application.Interfaces;
 using TechStore.Domain.Entities;
 
-namespace TechStore.Controllers
+namespace TechStore.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class CategoriesController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CategoriesController : ControllerBase
+    private readonly ICategoryService _categoryService;
+
+    public CategoriesController(ICategoryService categoryService)
     {
-        private readonly ECommerceTechContext _context;
+        _categoryService = categoryService;
+    }
 
-        public CategoriesController(ECommerceTechContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/categorias
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryTb>>> GetAll()
-        {
-            return await _context.CategoryTbs.ToListAsync();
-        }
-
-        // POST: api/categorias
-        [HttpPost]
-        public async Task<ActionResult<CategoryTb>> Create(CategoryTb category)
-        {
-            _context.CategoryTbs.Add(category);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetAll), new { id = category.IdCategory }, category);
-        }
+    // GET: api/categories
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<CategoryTb>>> GetAll()
+    {
+        var categories = await _categoryService.GetAllAsync();
+        return Ok(categories);
     }
 }

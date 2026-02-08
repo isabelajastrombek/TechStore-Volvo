@@ -1,21 +1,19 @@
-using Microsoft.EntityFrameworkCore;
 using TechStore.Application.Interfaces;
 using TechStore.Domain.Entities;
-using TechStore.Infrastructure.Data;
 
 namespace TechStore.Application.Services;
 
 public class CategoryService : ICategoryService
 {
-    private readonly ECommerceTechContext _context;
+    private readonly ICategoryRepository _repository;
 
-    public CategoryService(ECommerceTechContext context)
+    public CategoryService(ICategoryRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public async Task<IEnumerable<CategoryTb>> GetAllAsync()
     {
-        return await _context.CategoryTbs.ToListAsync();
+        return await _repository.GetAllAsync();
     }
 }

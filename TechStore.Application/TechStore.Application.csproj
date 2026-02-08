@@ -2,12 +2,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TechStore.Domain\TechStore.Domain.csproj" />
-    <ProjectReference Include="..\TechStore.Infrastructure\TechStore.Infrastructure.csproj" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.2" />
   </ItemGroup>
 
   <PropertyGroup>

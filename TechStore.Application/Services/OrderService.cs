@@ -1,45 +1,19 @@
-using Microsoft.EntityFrameworkCore;
 using TechStore.Application.Interfaces;
 using TechStore.Domain.Entities;
-using TechStore.Infrastructure.Data;
 
-namespace TechStore.Domain.Services;
+namespace TechStore.Application.Services;
 
 public class OrderService : IOrderService
 {
-    private readonly ECommerceTechContext _context;
+    private readonly IOrderRepository _orderRepository;
 
-    public OrderService(ECommerceTechContext context)
+    public OrderService(IOrderRepository orderRepository)
     {
-        _context = context;
+        _orderRepository = orderRepository;
     }
 
     public async Task<IEnumerable<OrderTb>> GetAllAsync()
     {
-        return await _context.OrderTbs.ToListAsync();
+        return await _orderRepository.GetAllAsync();
     }
-
-
-// public class PaymentService {
-//     public Card GenerateToken(string realCardNumber, int idClient, string cpfCard, string expDate, string TypeCard, string nicknameCard, string nameOnCard) {
-        
-//         string LastDigits = realCardNumber.Substring(realCardNumber.Length - 4);
-        
-//         return new Card {
-//             IdClient = idClient,
-//             MaskedNumber = $"**** **** **** {LastDigits}",
-//             CpfCard = cpfCard,
-//             ExpDateCard = expDate,
-//             TypeCard = TypeCard,
-//             NicknameCard = nicknameCard,
-//             NameOnCard = nameOnCard,
-
-//             PaymentToken = "TOK_" + Guid.NewGuid().ToString().ToUpper(), 
-//         };
-//     }
-// }
-
-
-
-
 }

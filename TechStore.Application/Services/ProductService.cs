@@ -1,55 +1,39 @@
-using Microsoft.EntityFrameworkCore;
-using TechStore.Application.Interfaces;
-using TechStore.Domain.Entities;
-using TechStore.Infrastructure.Data;
 using TechStore.Application.DTOs;
 using TechStore.Application.Exceptions;
-
+using TechStore.Application.Interfaces;
+using TechStore.Domain.Entities;
 
 namespace TechStore.Application.Services;
 
 public class ProductService : IProductService
 {
-    private readonly ECommerceTechContext _context;
+    private readonly IProductRepository _repository;
 
-    public ProductService(ECommerceTechContext context)
+    public ProductService(IProductRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
-   public async Task<IEnumerable<ProductResponseDTO>> GetAllAsync(int skip, int take)
+    public async Task<IEnumerable<ProductResponseDTO>> GetAllAsync(int skip, int take)
     {
-        if (take > 50) take = 50; 
+        var products = await _repository.GetAllAsync(skip, take);
 
-        return await _context.ProductTbs
-            .Include(p => p.IdCategoryNavigation)
-            .AsNoTracking()
-            .OrderBy(p => p.IdProduct) 
-            .Skip(skip)                
-            .Take(take)                
-            .Select(p => new ProductResponseDTO
-            {
-                Id = p.IdProduct,
-                Name = p.NameProduct,
-                Price = p.PriceProduct,
-                CategoryName = p.IdCategoryNavigation.NameCategory,
-                Brand = p.BrandProduct,
-                Specs = p.SpecsProduct
-            })
-            .ToListAsync();
+        return products.Select(p => new ProductResponseDTO
+        {
+            Id = p.IdProduct,
+            Name = p.NameProduct,
+            Price = p.PriceProduct,
+            CategoryName = p.IdCategoryNavigation.NameCategory,
+            Brand = p.BrandProduct,
+            Specs = p.SpecsProduct
+        });
     }
 
     public async Task<ProductResponseDTO> CreateAsync(ProductInsertDto productInsert)
     {
-
-        var categoryExists = await _context.CategoryTbs
-                .AnyAsync(c => c.IdCategory == productInsert.IdCategory);
-
-            if (!categoryExists)
-            {
-                throw new CategoryNotFoundException(productInsert.IdCategory);
-            }
-
+        var categoryExists = await _repository.CategoryExistsAsync(productInsert.IdCategory);
+        if (!categoryExists)
+            throw new CategoryNotFoundException(productInsert.IdCategory);
 
         var product = new ProductTb
         {
@@ -62,79 +46,55 @@ public class ProductService : IProductService
             SpecsProduct = productInsert.Specs
         };
 
-        _context.ProductTbs.Add(product);
-        await _context.SaveChangesAsync();
+        await _repository.AddAsync(product);
 
-        var savedProduct = await _context.ProductTbs
-        .Include(p => p.IdCategoryNavigation)
-        .FirstAsync(p => p.IdProduct == product.IdProduct);
-        return new ProductResponseDTO 
-        { 
+        var savedProduct = await _repository.GetByIdAsync(product.IdProduct)!;
+
+        return new ProductResponseDTO
+        {
             Id = savedProduct.IdProduct,
             Name = savedProduct.NameProduct,
             Price = savedProduct.PriceProduct,
             CategoryName = savedProduct.IdCategoryNavigation.NameCategory,
             Description = savedProduct.DescriptionProduct,
             Brand = savedProduct.BrandProduct,
-            Specs = savedProduct.SpecsProduct 
+            Specs = savedProduct.SpecsProduct
+        };
+    }
 
-        };  
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var product = await _repository.GetByIdAsync(id);
+        if (product == null) return false;
+
+        await _repository.DeleteAsync(product);
+        return true;
+    }
+
+    public async Task<bool> UpdateStockAsync(int id, int newStock)
+    {
+        if (newStock < 0) return false;
+
+        var product = await _repository.GetByIdAsync(id);
+        if (product == null) return false;
+
+        product.StockProduct = newStock;
+        await _repository.UpdateAsync(product);
+        return true;
     }
 
     public async Task<IEnumerable<ProductResponseDTO>> GetByCategoryAsync(string categoryName)
     {
-        return await _context.ProductTbs
-            .Include(p => p.IdCategoryNavigation)
-            .Where(p => p.IdCategoryNavigation.NameCategory.ToLower() == categoryName.ToLower())
-            .AsNoTracking()
-            .Select(p => new ProductResponseDTO
-            {
-                Id = p.IdProduct,
-                Name = p.NameProduct,
-                Price = p.PriceProduct,
-                CategoryName = p.IdCategoryNavigation.NameCategory,
-                Brand = p.BrandProduct,
-                Specs = p.SpecsProduct
-            })
-            .ToListAsync();
-    }
+        var products = await _repository.GetByCategoryAsync(categoryName);
 
-
-    public async Task<bool> DeleteAsync(int id)
-    {
-        var product = await _context.ProductTbs.FindAsync(id);
-        
-        if (product == null)
+        return products.Select(p => new ProductResponseDTO
         {
-            return false; 
-        }
-
-        _context.ProductTbs.Remove(product);
-        await _context.SaveChangesAsync();
-        
-        return true; 
+            Id = p.IdProduct,
+            Name = p.NameProduct,
+            Price = p.PriceProduct,
+            CategoryName = p.IdCategoryNavigation.NameCategory,
+            Brand = p.BrandProduct,
+            Specs = p.SpecsProduct
+        });
     }
-
-
-    public async Task<bool> UpdateStockAsync(int id, int newStock)
-    {
-        var product = await _context.ProductTbs.FindAsync(id);
-        
-        if (product == null) {return false;}
-
-        else if (newStock < 0) {return false;}
-
-        else
-        {
-            product.StockProduct = newStock;
-        
-            _context.ProductTbs.Update(product);
-            await _context.SaveChangesAsync();
-            
-            return true; 
-        }
-
-        
-    }
-
 }

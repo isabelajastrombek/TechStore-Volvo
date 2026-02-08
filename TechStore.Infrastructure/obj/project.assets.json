@@ -1259,6 +1259,22 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
+      "TechStore.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
+          "Microsoft.EntityFrameworkCore": "10.0.2",
+          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.2",
+          "TechStore.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TechStore.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TechStore.Application.dll": {}
+        }
+      },
       "TechStore.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -3704,6 +3720,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "TechStore.Application/1.0.0": {
+      "type": "project",
+      "path": "../TechStore.Application/TechStore.Application.csproj",
+      "msbuildProject": "../TechStore.Application/TechStore.Application.csproj"
+    },
     "TechStore.Domain/1.0.0": {
       "type": "project",
       "path": "../TechStore.Domain/TechStore.Domain.csproj",
@@ -3716,6 +3737,7 @@
       "Microsoft.EntityFrameworkCore >= 10.0.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 10.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 10.0.2",
+      "TechStore.Application >= 1.0.0",
       "TechStore.Domain >= 1.0.0"
     ]
   },
@@ -3744,6 +3766,9 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
+            "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj": {
+              "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj"
+            },
             "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
               "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj"
             }
