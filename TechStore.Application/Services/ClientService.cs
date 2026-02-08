@@ -84,6 +84,7 @@ public class ClientService : IClientService
             TypeCard = cardDto.TypeCard,
             NicknameCard = cardDto.NicknameCard,
             NameOnCard = cardDto.NameOnCard,
+            CpfCard = cardDto.Cpf,
             
             // gera o token
             PaymentToken = "TOK_" + Guid.NewGuid().ToString().ToUpper(),

@@ -16,7 +16,7 @@ public class ClientController : ControllerBase
     }
 
 
-    [HttpPost("addresses")]
+    [HttpPost("addAddress")]
     public async Task<IActionResult> AddAddress([FromBody] AddressCreateDto addressDto)
     {
         var newAddress = await _clientService.AddAddressAsync(addressDto);
