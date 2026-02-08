@@ -1,0 +1,23 @@
+using TechStore.Domain.Entities;
+using TechStore.Domain.Interfaces;
+using TechStore.Infrastructure.Data;
+
+using Microsoft.EntityFrameworkCore;
+
+namespace TechStore.Application.Services;
+ 
+
+public class AuthService : IAuthService
+{
+    private readonly ECommerceTechContext _context;
+
+    public AuthService(ECommerceTechContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IEnumerable<ClientTb>> GetAllAsync()
+    {
+        return await _context.ClientTbs.ToListAsync();
+    }
+}
