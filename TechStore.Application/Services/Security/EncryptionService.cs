@@ -6,7 +6,7 @@ using System.IO;
 using BCrypt.Net;
 
 
-namespace TechStore.Infrastructure.Security;
+namespace TechStore.Application.Services.Security;
 public class EncryptionService : IEncryptionService
 {
    
