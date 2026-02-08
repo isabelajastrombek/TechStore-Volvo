@@ -3,7 +3,7 @@ using TechStore.Domain.Interfaces;
 using TechStore.Domain.Entities;
 using TechStore.Infrastructure.Data;
 
-namespace TechStore.Application.Services;
+namespace TechStore.Domain.Services;
 
 public class OrderService : IOrderService
 {

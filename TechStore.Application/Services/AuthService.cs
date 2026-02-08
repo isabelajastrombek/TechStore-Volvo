@@ -4,8 +4,7 @@ using TechStore.Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace TechStore.Application.Services;
- 
+namespace TechStore.Domain.Services;
 
 public class AuthService : IAuthService
 {
