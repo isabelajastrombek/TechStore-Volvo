@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {}
+    "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {}
   },
   "projects": {
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
+    "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
+        "projectUniqueName": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
         "projectName": "TechStore.Domain",
-        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
-        "packagesPath": "/Users/eros/.nuget/packages/",
-        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/",
+        "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
+        "packagesPath": "/Users/isabela/.nuget/packages/",
+        "outputPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/eros/.nuget/NuGet/NuGet.Config"
+          "/Users/isabela/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
