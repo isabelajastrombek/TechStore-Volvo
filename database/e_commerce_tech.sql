@@ -9,7 +9,7 @@ GO
 
 CREATE TABLE Client.Client_tb(
     IdClient INT PRIMARY KEY IDENTITY(1,1),
-    CpfClient VARCHAR(11) NOT NULL UNIQUE,
+    CpfClient VARCHAR(255) NOT NULL UNIQUE,
     NameClient VARCHAR(100),
     BirthDateClient DATE,
     PhoneClient VARCHAR(16),
