@@ -1,5 +1,5 @@
 using TechStore.Domain.Entities;
-using TechStore.Domain.Interfaces;
+using TechStore.Application.Interfaces;
 using TechStore.Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;

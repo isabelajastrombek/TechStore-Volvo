@@ -10,3 +10,15 @@
 /Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/refint/TechStore.Domain.dll
 /Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.pdb
 /Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/ref/TechStore.Domain.dll
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/bin/Debug/net10.0/TechStore.Domain.deps.json
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/bin/Debug/net10.0/TechStore.Domain.dll
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/bin/Debug/net10.0/TechStore.Domain.pdb
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.AssemblyInfoInputs.cache
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.AssemblyInfo.cs
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.csproj.CoreCompileInputs.cache
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.sourcelink.json
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.dll
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/refint/TechStore.Domain.dll
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/TechStore.Domain.pdb
+/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/Debug/net10.0/ref/TechStore.Domain.dll

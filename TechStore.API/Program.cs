@@ -1,9 +1,12 @@
 using TechStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using TechStore.Application.Interfaces;
+using TechStore.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddDbContext<ECommerceTechContext>(options =>
     options.UseSqlServer(
