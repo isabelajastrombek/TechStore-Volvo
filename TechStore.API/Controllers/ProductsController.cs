@@ -22,14 +22,14 @@ namespace TechStore.Controllers
 
         // Para mostrar todos os produtos do BD
         [HttpGet("catalog")]
-        public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetAll([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public async Task<ActionResult<IEnumerable<ProductResponseDto>>> GetAll([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
             var products = await _productService.GetAllAsync(skip, take);
             return Ok(products);
         }
 
         [HttpPost("insert")] // para inserir o produto no BD
-        public async Task<ActionResult<ProductResponseDTO>> Create(ProductInsertDto insert)
+        public async Task<ActionResult<ProductResponseDto>> Create(ProductInsertDto insert)
         {
             try 
             {
@@ -47,7 +47,7 @@ namespace TechStore.Controllers
         }
 
         [HttpGet("search")] //Para procurar todos os produtos de uma determinada categoria
-        public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> SearchByCategory([FromQuery] string categoryName)
+        public async Task<ActionResult<IEnumerable<ProductResponseDto>>> SearchByCategory([FromQuery] string categoryName)
         {
             if (string.IsNullOrWhiteSpace(categoryName))
             {
@@ -59,6 +59,20 @@ namespace TechStore.Controllers
             if (!products.Any())
             {
                 return NotFound($"Nenhum produto encontrado para a categoria '{categoryName}'.");
+            }
+
+            return Ok(products);
+        }
+
+
+        [HttpGet("searchFiltered")]
+        public async Task<IActionResult> GetProducts([FromQuery] ProductSearchDto searchDto)
+        {
+            var products = await _productService.GetProductsAsync(searchDto);
+
+            if (products == null || !products.Any())
+            {
+                return NotFound(new { message = "Nenhum produto encontrado com esses filtros" });
             }
 
             return Ok(products);

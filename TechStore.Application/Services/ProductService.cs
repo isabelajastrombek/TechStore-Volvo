@@ -17,7 +17,7 @@ public class ProductService : IProductService
         _context = context;
     }
 
-   public async Task<IEnumerable<ProductResponseDTO>> GetAllAsync(int skip, int take)
+   public async Task<IEnumerable<ProductResponseDto>> GetAllAsync(int skip, int take)
     {
         if (take > 50) take = 50; 
 
@@ -27,7 +27,7 @@ public class ProductService : IProductService
             .OrderBy(p => p.IdProduct) 
             .Skip(skip)                
             .Take(take)                
-            .Select(p => new ProductResponseDTO
+            .Select(p => new ProductResponseDto
             {
                 Id = p.IdProduct,
                 Name = p.NameProduct,
@@ -39,7 +39,7 @@ public class ProductService : IProductService
             .ToListAsync();
     }
 
-    public async Task<ProductResponseDTO> CreateAsync(ProductInsertDto productInsert)
+    public async Task<ProductResponseDto> CreateAsync(ProductInsertDto productInsert)
     {
 
         var categoryExists = await _context.CategoryTbs
@@ -68,7 +68,7 @@ public class ProductService : IProductService
         var savedProduct = await _context.ProductTbs
         .Include(p => p.IdCategoryNavigation)
         .FirstAsync(p => p.IdProduct == product.IdProduct);
-        return new ProductResponseDTO 
+        return new ProductResponseDto 
         { 
             Id = savedProduct.IdProduct,
             Name = savedProduct.NameProduct,
@@ -81,13 +81,13 @@ public class ProductService : IProductService
         };  
     }
 
-    public async Task<IEnumerable<ProductResponseDTO>> GetByCategoryAsync(string categoryName)
+    public async Task<IEnumerable<ProductResponseDto>> GetByCategoryAsync(string categoryName)
     {
         return await _context.ProductTbs
             .Include(p => p.IdCategoryNavigation)
             .Where(p => p.IdCategoryNavigation.NameCategory.ToLower() == categoryName.ToLower())
             .AsNoTracking()
-            .Select(p => new ProductResponseDTO
+            .Select(p => new ProductResponseDto
             {
                 Id = p.IdProduct,
                 Name = p.NameProduct,
@@ -136,5 +136,44 @@ public class ProductService : IProductService
 
         
     }
+
+
+
+    public async Task<IEnumerable<ProductResponseDto>> GetProductsAsync(ProductSearchDto searchDto)
+    {
+        
+        IQueryable<ProductTb> query = _context.ProductTbs
+            .Include(p => p.IdCategoryNavigation);
+
+        if (!string.IsNullOrEmpty(searchDto.Name))
+            query = query.Where(p => p.NameProduct.Contains(searchDto.Name));
+
+        if (searchDto.MinPrice > 0)
+            query = query.Where(p => p.PriceProduct >= searchDto.MinPrice);
+
+        if (searchDto.MaxPrice > 0)
+            query = query.Where(p => p.PriceProduct <= searchDto.MaxPrice);
+
+        if (!string.IsNullOrEmpty(searchDto.CategoryName))
+            query = query.Where(p => p.IdCategoryNavigation.NameCategory.Contains(searchDto.CategoryName));
+
+        if (!string.IsNullOrEmpty(searchDto.Brand))
+            query = query.Where(p => p.BrandProduct.Contains(searchDto.Brand));
+
+        var products = await query.ToListAsync();
+
+        return products.Select(p => new ProductResponseDto
+        {
+            Id = p.IdProduct,
+            Name = p.NameProduct,
+            Price = p.PriceProduct,
+            Description = p.DescriptionProduct,
+            CategoryName = p.IdCategoryNavigation?.NameCategory,
+            Brand = p.BrandProduct,
+            Specs = p.SpecsProduct 
+        });
+    }
+
+
 
 }
