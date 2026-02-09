@@ -68,7 +68,7 @@ CREATE TABLE Sales.Card_tb(
     IdCard INT PRIMARY KEY IDENTITY(1,1),
     MaskedNumber VARCHAR(20),  
     PaymentToken VARCHAR(MAX),  
-    CpfCard VARCHAR(11) NOT NULL,
+    CpfCard VARCHAR(255) NOT NULL,
     ExpDateCard DATE NOT NULL,
     TypeCard VARCHAR(10) NOT NULL,
     NicknameCard VARCHAR(20),

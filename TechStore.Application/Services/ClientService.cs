@@ -12,10 +12,12 @@ namespace TechStore.Application.Services;
 public class ClientService : IClientService
 {
     private readonly ECommerceTechContext _context;
+    private readonly IEncryptionService _encryptionService;
 
-    public ClientService(ECommerceTechContext context)
+    public ClientService(ECommerceTechContext context, IEncryptionService encryptionService)
     {
         _context = context;
+        _encryptionService = encryptionService;
     }
 
     public async Task<IEnumerable<ClientTb>> GetAllAsync()
@@ -84,7 +86,7 @@ public class ClientService : IClientService
             TypeCard = cardDto.TypeCard,
             NicknameCard = cardDto.NicknameCard,
             NameOnCard = cardDto.NameOnCard,
-            CpfCard = cardDto.Cpf,
+            CpfCard = _encryptionService.Encrypt(cardDto.Cpf),
             
             // gera o token
             PaymentToken = "TOK_" + Guid.NewGuid().ToString().ToUpper(),
@@ -111,7 +113,7 @@ public class ClientService : IClientService
             MaskedNumber = c.MaskedNumber,
             NicknameCard = c.NicknameCard,
             PaymentToken = c.PaymentToken,
-            CpfCard = c.CpfCard,
+            CpfCard = _encryptionService.Decrypt(c.CpfCard),
             ExpDateCard = c.ExpDateCard.ToString("MM/yy")
         });
     }
