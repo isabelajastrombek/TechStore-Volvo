@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj": {}
+    "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj": {}
   },
   "projects": {
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj": {
+    "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj",
+        "projectUniqueName": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj",
         "projectName": "TechStore.Application",
-        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj",
-        "packagesPath": "/Users/eros/.nuget/packages/",
-        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Application/obj/",
+        "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj",
+        "packagesPath": "/Users/isabela/.nuget/packages/",
+        "outputPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/eros/.nuget/NuGet/NuGet.Config"
+          "/Users/isabela/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -26,11 +26,11 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
-                "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj"
+              "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
+                "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj"
               },
-              "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
-                "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj"
+              "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
+                "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj"
               }
             }
           }
@@ -53,11 +53,11 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[10.0.2, )"
+              "version": "[10.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[10.0.2, )"
+              "version": "[10.0.3, )"
             }
           },
           "imports": [
@@ -354,17 +354,17 @@
         }
       }
     },
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
+    "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
+        "projectUniqueName": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
         "projectName": "TechStore.Domain",
-        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
-        "packagesPath": "/Users/eros/.nuget/packages/",
-        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/",
+        "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
+        "packagesPath": "/Users/isabela/.nuget/packages/",
+        "outputPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/eros/.nuget/NuGet/NuGet.Config"
+          "/Users/isabela/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -687,17 +687,17 @@
         }
       }
     },
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
+    "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
+        "projectUniqueName": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
         "projectName": "TechStore.Infrastructure",
-        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
-        "packagesPath": "/Users/eros/.nuget/packages/",
-        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/obj/",
+        "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
+        "packagesPath": "/Users/isabela/.nuget/packages/",
+        "outputPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/eros/.nuget/NuGet/NuGet.Config"
+          "/Users/isabela/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -709,8 +709,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
-                "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj"
+              "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
+                "projectPath": "/Users/isabela/Documents/GitHub/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj"
               }
             }
           }
@@ -737,17 +737,17 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[10.0.2, )"
+              "version": "[10.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[10.0.2, )"
+              "version": "[10.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.2, )"
+              "version": "[10.0.3, )"
             }
           },
           "imports": [

@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using TechStore.Application.DTOs;
+using TechStore.Application.Exceptions;
 using TechStore.Application.Interfaces;
 using TechStore.Domain.Entities;
 using TechStore.Infrastructure.Data;
 
-namespace TechStore.Domain.Services;
+namespace TechStore.Application.Services;
 
 public class OrderService : IOrderService
 {
@@ -14,32 +16,75 @@ public class OrderService : IOrderService
         _context = context;
     }
 
-    public async Task<IEnumerable<OrderTb>> GetAllAsync()
+    public async Task<int> CreateOrderAsync(CreateOrderDto dto)
     {
-        return await _context.OrderTbs.ToListAsync();
+        using var transaction = await _context.Database.BeginTransactionAsync();
+
+        try
+        {
+            var client = await _context.ClientTbs.FindAsync(dto.ClientId);
+            if (client == null)
+                throw new NotFoundException("Client not found");
+
+            var order = new OrderTb
+            {
+                DateOrder = DateTime.Now,
+                IdClient = dto.ClientId,
+                IdAddress = dto.AddressId,
+                IdCard = dto.CardId,
+                StatusOrder = "Created",
+                TotalShipping = 0
+            };
+
+            _context.OrderTbs.Add(order);
+            await _context.SaveChangesAsync();
+
+            decimal totalValue = 0;
+
+            foreach (var item in dto.Items)
+            {
+                var product = await _context.ProductTbs.FindAsync(item.ProductId);
+                if (product == null)
+                    throw new NotFoundException($"Product {item.ProductId} not found");
+
+                if (product.StockProduct < item.Quantity)
+                    throw new BusinessRuleException($"Insufficient stock for product {product.NameProduct}");
+
+                product.StockProduct -= item.Quantity;
+
+                var orderItem = new ItemOrderTb
+                {
+                    IdOrder = order.IdOrder,
+                    IdProduct = product.IdProduct,
+                    QtyItemOrder = item.Quantity,
+                    PriceUnitItem = product.PriceProduct
+                };
+
+                totalValue += product.PriceProduct * item.Quantity;
+
+                _context.ItemOrderTbs.Add(orderItem);
+            }
+
+            order.TotalPrice = totalValue;
+
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+
+            return order.IdOrder;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
-
-// public class PaymentService {
-//     public Card GenerateToken(string realCardNumber, int idClient, string cpfCard, string expDate, string TypeCard, string nicknameCard, string nameOnCard) {
-        
-//         string LastDigits = realCardNumber.Substring(realCardNumber.Length - 4);
-        
-//         return new Card {
-//             IdClient = idClient,
-//             MaskedNumber = $"**** **** **** {LastDigits}",
-//             CpfCard = cpfCard,
-//             ExpDateCard = expDate,
-//             TypeCard = TypeCard,
-//             NicknameCard = nicknameCard,
-//             NameOnCard = nameOnCard,
-
-//             PaymentToken = "TOK_" + Guid.NewGuid().ToString().ToUpper(), 
-//         };
-//     }
-// }
-
-
-
+    public async Task<IEnumerable<OrderTb>> GetAllAsync()
+    {
+        return await _context.OrderTbs
+            .Include(o => o.ItemOrderTbs)
+            .ThenInclude(i => i.IdProductNavigation)
+            .ToListAsync();
+    }
 
 }
