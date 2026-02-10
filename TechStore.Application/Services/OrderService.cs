@@ -48,7 +48,9 @@ public class OrderService : IOrderService
                     throw new NotFoundException($"Product {item.ProductId} not found");
 
                 if (product.StockProduct < item.Quantity)
-                    throw new BusinessRuleException($"Insufficient stock for product {product.NameProduct}");
+                    throw new BusinessRuleException(
+                        $"Insufficient stock for product {product.NameProduct}"
+                    );
 
                 product.StockProduct -= item.Quantity;
 
@@ -61,7 +63,6 @@ public class OrderService : IOrderService
                 };
 
                 totalValue += product.PriceProduct * item.Quantity;
-
                 _context.ItemOrderTbs.Add(orderItem);
             }
 
@@ -79,12 +80,56 @@ public class OrderService : IOrderService
         }
     }
 
-    public async Task<IEnumerable<OrderTb>> GetAllAsync()
+    // ✅ ESTE É O GetAllAsync CORRETO (DTO)
+    public async Task<IEnumerable<OrderSummaryDto>> GetAllAsync()
     {
         return await _context.OrderTbs
-            .Include(o => o.ItemOrderTbs)
-            .ThenInclude(i => i.IdProductNavigation)
+            .Select(o => new OrderSummaryDto
+            {
+                OrderId = o.IdOrder,
+                DateOrder = o.DateOrder!.Value,
+                Status = o.StatusOrder!,
+                TotalPrice = o.TotalPrice!.Value
+            })
             .ToListAsync();
     }
 
+    public async Task<OrderDetailsDto> GetByIdAsync(int orderId)
+    {
+        var order = await _context.OrderTbs
+            .Include(o => o.ItemOrderTbs)
+                .ThenInclude(i => i.IdProductNavigation)
+            .FirstOrDefaultAsync(o => o.IdOrder == orderId);
+
+        if (order == null)
+            throw new NotFoundException("Order not found");
+
+        return new OrderDetailsDto
+        {
+            OrderId = order.IdOrder,
+            DateOrder = order.DateOrder,
+            Status = order.StatusOrder!,
+            ClientId = order.IdClient,
+            AddressId = order.IdAddress!,
+            TotalPrice = order.TotalPrice,
+            TotalShipping = order.TotalShipping,
+            Items = order.ItemOrderTbs.Select(i => new OrderItemDto
+            {
+                ProductId = i.IdProduct,
+                Quantity = i.QtyItemOrder,
+                UnitPrice = i.PriceUnitItem!
+            }).ToList()
+        };
+    }
+
+    public async Task UpdateStatusAsync(int orderId, string status)
+    {
+        var order = await _context.OrderTbs.FindAsync(orderId);
+
+        if (order == null)
+            throw new NotFoundException("Order not found");
+
+        order.StatusOrder = status;
+        await _context.SaveChangesAsync();
+    }
 }

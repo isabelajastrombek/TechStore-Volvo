@@ -1,10 +1,14 @@
 using TechStore.Application.DTOs;
-using TechStore.Domain.Entities;
 
 namespace TechStore.Application.Interfaces;
 
 public interface IOrderService
 {
     Task<int> CreateOrderAsync(CreateOrderDto dto);
-    Task<IEnumerable<OrderTb>> GetAllAsync();
+
+    Task<IEnumerable<OrderSummaryDto>> GetAllAsync();
+
+    Task<OrderDetailsDto> GetByIdAsync(int orderId);
+
+    Task UpdateStatusAsync(int orderId, string status);
 }

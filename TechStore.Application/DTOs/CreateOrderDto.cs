@@ -6,5 +6,5 @@ public class CreateOrderDto
     public int AddressId { get; set; }
     public int CardId { get; set; }
 
-    public List<CreateOrderItemDto> Items { get; set; }
+    public List<CreateOrderItemDto> Items { get; set; } = new();
 }
