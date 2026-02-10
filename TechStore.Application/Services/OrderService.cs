@@ -10,11 +10,14 @@ namespace TechStore.Application.Services;
 public class OrderService : IOrderService
 {
     private readonly ECommerceTechContext _context;
+    private readonly IFreightService _freightService;
 
-    public OrderService(ECommerceTechContext context)
+    public OrderService(ECommerceTechContext context, IFreightService freightService)
     {
         _context = context;
+        _freightService = freightService;
     }
+
 
     public async Task<int> CreateOrderAsync(CreateOrderDto dto)
     {
@@ -26,20 +29,10 @@ public class OrderService : IOrderService
             if (client == null)
                 throw new NotFoundException("Client not found");
 
-            var order = new OrderTb
-            {
-                DateOrder = DateTime.Now,
-                IdClient = dto.ClientId,
-                IdAddress = dto.AddressId,
-                IdCard = dto.CardId,
-                StatusOrder = "Created",
-                TotalShipping = 0
-            };
+            decimal totalWeight = 0;
+            decimal totalProductsValue = 0;
 
-            _context.OrderTbs.Add(order);
-            await _context.SaveChangesAsync();
-
-            decimal totalValue = 0;
+            var productsCache = new Dictionary<int, ProductTb>();
 
             foreach (var item in dto.Items)
             {
@@ -52,6 +45,41 @@ public class OrderService : IOrderService
                         $"Insufficient stock for product {product.NameProduct}"
                     );
 
+                totalWeight += product.WeightKg * item.Quantity;
+                totalProductsValue += product.PriceProduct * item.Quantity;
+
+                productsCache[item.ProductId] = product;
+            }
+
+
+            var freight = await _freightService.CalculateAsync(new FreightRequestDto
+            {
+                FromZipCode = "01001000",
+                ToZipCode = dto.ZipCode,
+                WeightKg = totalWeight
+            });
+
+            var order = new OrderTb
+            {
+                DateOrder = DateTime.Now,
+                IdClient = dto.ClientId,
+                IdAddress = dto.AddressId,
+                IdCard = dto.CardId,
+                StatusOrder = "Created",
+                TotalShipping = freight.Price,
+                TotalPrice = totalProductsValue + freight.Price
+            };
+
+            order.TotalShipping = freight.Price;
+            order.TotalPrice += freight.Price;
+
+            _context.OrderTbs.Add(order);
+            await _context.SaveChangesAsync();
+
+            foreach (var item in dto.Items)
+            {
+                var product = productsCache[item.ProductId];
+
                 product.StockProduct -= item.Quantity;
 
                 var orderItem = new ItemOrderTb
@@ -62,11 +90,8 @@ public class OrderService : IOrderService
                     PriceUnitItem = product.PriceProduct
                 };
 
-                totalValue += product.PriceProduct * item.Quantity;
                 _context.ItemOrderTbs.Add(orderItem);
             }
-
-            order.TotalPrice = totalValue;
 
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();

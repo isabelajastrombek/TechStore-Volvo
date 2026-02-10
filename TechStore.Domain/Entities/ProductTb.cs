@@ -21,6 +21,8 @@ public partial class ProductTb
 
     public string? BrandProduct { get; set; }
 
+    public int WeightKg { get; set; }
+
     public virtual CategoryTb IdCategoryNavigation { get; set; } = null!;
 
     public virtual ICollection<ItemOrderTb> ItemOrderTbs { get; set; } = new List<ItemOrderTb>();

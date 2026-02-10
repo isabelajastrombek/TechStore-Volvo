@@ -31,6 +31,9 @@ CREATE TABLE Client.Address_tb(
 );
 GO
 
+ALTER TABLE Client.Address_tb
+ADD ZipCode VARCHAR(8) NOT NULL;
+GO
 
 
 CREATE SCHEMA Catalog;
@@ -58,8 +61,16 @@ CREATE TABLE Catalog.Product_tb(
 GO
 
 
+ALTER TABLE Catalog.Product_tb
+ADD WeightKg DECIMAL(5,2) NOT NULL DEFAULT 0;
+GO
 
-
+-- ALTER TABLE Catalog.Product_tb
+-- ADD HeightCm DECIMAL(5,2) NOT NULL DEFAULT 0,
+--     WidthCm  DECIMAL(5,2) NOT NULL DEFAULT 0,
+--     LengthCm DECIMAL(5,2) NOT NULL DEFAULT 0;
+-- GO
+-- as dimensoes do produto vao aqui. o que voce acha?
 
 CREATE SCHEMA Sales;
 GO

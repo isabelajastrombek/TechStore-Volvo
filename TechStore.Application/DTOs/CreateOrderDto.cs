@@ -5,6 +5,7 @@ public class CreateOrderDto
     public int ClientId { get; set; }
     public int AddressId { get; set; }
     public int CardId { get; set; }
+    public string ZipCode { get; set; } = null!;
 
     public List<CreateOrderItemDto> Items { get; set; } = new();
 }
