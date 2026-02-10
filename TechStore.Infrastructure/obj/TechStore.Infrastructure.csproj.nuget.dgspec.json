@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {}
+    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {}
   },
   "projects": {
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
+    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
+        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj",
         "projectName": "TechStore.Domain",
-        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
+        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj",
         "packagesPath": "/Users/eros/.nuget/packages/",
-        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/",
+        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/eros/.nuget/NuGet/NuGet.Config"
@@ -337,14 +337,14 @@
         }
       }
     },
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
+    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
+        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
         "projectName": "TechStore.Infrastructure",
-        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
+        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
         "packagesPath": "/Users/eros/.nuget/packages/",
-        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/obj/",
+        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/eros/.nuget/NuGet/NuGet.Config"
@@ -359,8 +359,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
-                "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj"
+              "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj": {
+                "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj"
               }
             }
           }

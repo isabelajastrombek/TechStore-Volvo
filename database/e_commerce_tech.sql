@@ -25,6 +25,7 @@ CREATE TABLE Client.Address_tb(
     ComplementAddress VARCHAR(20),
     CityAddress VARCHAR(60),
     StateAddress VARCHAR(2),
+    Cep VARCHAR(10),
     TypeAddress VARCHAR(20),
     IdClient INT NOT NULL,
     CONSTRAINT FK_Address_Client FOREIGN KEY (IdClient) REFERENCES Client.Client_tb(IdClient)
@@ -49,6 +50,7 @@ CREATE TABLE Catalog.Product_tb(
     StockProduct INT NOT NULL DEFAULT 0,
     IdCategory INT NOT NULL,
     DescriptionProduct VARCHAR(500),
+    WeightProduct INTEGER,
     SpecsProduct NVARCHAR(MAX),
     BrandProduct VARCHAR(50),
     CONSTRAINT FK_Product_Category FOREIGN KEY (IdCategory) REFERENCES Catalog.Category_tb(IdCategory),
@@ -79,6 +81,15 @@ CREATE TABLE Sales.Card_tb(
 );
 GO
 
+CREATE TABLE Sales.Coupon_tb (
+    IdCoupon INT PRIMARY KEY IDENTITY(1,1),
+    Code VARCHAR(20) NOT NULL UNIQUE,
+    DiscountPercentage DECIMAL(5,2) NOT NULL,
+    ExpirationDate DATETIME2 NOT NULL,
+    IsActive BIT DEFAULT 1
+);
+GO
+
 CREATE TABLE Sales.Order_tb(
     IdOrder INT PRIMARY KEY IDENTITY(1,1),
     DateOrder DATETIME2 DEFAULT GETDATE(),
@@ -87,11 +98,13 @@ CREATE TABLE Sales.Order_tb(
     DeliveryDate DATE,
     idCard INT,
     idAddress INT,
+    IdCoupon INT NULL
     TotalPrice MONEY,
     TotalShipping MONEY,
     CONSTRAINT FK_Order_Client FOREIGN KEY (IdClient) REFERENCES Client.Client_tb(IdClient),
     CONSTRAINT FK_Order_Address FOREIGN KEY (IdAddress) REFERENCES Client.Address_tb(IdAddress),
     CONSTRAINT FK_Order_Card FOREIGN KEY (IdCard) REFERENCES Sales.Card_tb(IdCard)
+    CONSTRAINT FK_Order_Coupon FOREIGN KEY (IdCoupon) REFERENCES Sales.Coupon_tb(IdCoupon);
 );
 GO
 
@@ -105,4 +118,11 @@ CREATE TABLE Sales.ItemOrder_tb(
     CONSTRAINT FK_Item_Product FOREIGN KEY (IdProduct) REFERENCES Catalog.Product_tb(IdProduct)
 );
 GO
+
+
+
+
+FROM Catalog.Product_tb SELECT *;
+
+
 

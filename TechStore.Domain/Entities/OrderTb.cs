@@ -22,6 +22,8 @@ public partial class OrderTb
     public decimal? TotalPrice { get; set; }
 
     public decimal? TotalShipping { get; set; }
+    public int? IdCoupon { get; set; } 
+    public virtual CouponTb IdCouponNavigation { get; set;}
 
     public virtual AddressTb? IdAddressNavigation { get; set; }
 

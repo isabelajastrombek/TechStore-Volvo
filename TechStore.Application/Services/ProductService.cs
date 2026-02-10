@@ -34,7 +34,8 @@ public class ProductService : IProductService
                 Price = p.PriceProduct,
                 CategoryName = p.IdCategoryNavigation.NameCategory,
                 Brand = p.BrandProduct,
-                Specs = p.SpecsProduct
+                Specs = p.SpecsProduct,
+                Stock = p.StockProduct
             })
             .ToListAsync();
     }

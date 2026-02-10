@@ -16,6 +16,7 @@ public partial class ProductTb
     public int IdCategory { get; set; }
 
     public string? DescriptionProduct { get; set; }
+    public decimal? WeightProduct { get; set; }
 
     public string? SpecsProduct { get; set; }
 

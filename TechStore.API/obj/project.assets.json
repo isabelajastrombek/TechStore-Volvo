@@ -1700,11 +1700,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.API/TechStore.API.csproj",
+      "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.API/TechStore.API.csproj",
       "projectName": "TechStore.API",
-      "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.API/TechStore.API.csproj",
+      "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.API/TechStore.API.csproj",
       "packagesPath": "/Users/eros/.nuget/packages/",
-      "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.API/obj/",
+      "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/eros/.nuget/NuGet/NuGet.Config"
@@ -1719,11 +1719,11 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj": {
-              "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Application/TechStore.Application.csproj"
+            "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Application/TechStore.Application.csproj": {
+              "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Application/TechStore.Application.csproj"
             },
-            "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
-              "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj"
+            "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
+              "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Infrastructure/TechStore.Infrastructure.csproj"
             }
           }
         }

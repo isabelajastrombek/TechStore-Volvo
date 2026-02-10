@@ -39,6 +39,7 @@ public class ClientService : IClientService
             ComplementAddress = addressDto.ComplementAddress,
             CityAddress = addressDto.CityAddress,
             StateAddress = addressDto.StateAddress,
+            Cep = addressDto.CepAddress,
             TypeAddress = addressDto.TypeAddress
         };
 
@@ -62,6 +63,7 @@ public class ClientService : IClientService
             StreetAddress = a.StreetAddress,
             NumberAddress = a.NumberAddress,
             ComplementAddress = a.ComplementAddress,
+            CepAddress = a.Cep,
             CityAddress = a.CityAddress,
             StateAddress = a.StateAddress
         });
@@ -117,8 +119,6 @@ public class ClientService : IClientService
             ExpDateCard = c.ExpDateCard.ToString("MM/yy")
         });
     }
-
-
 
 
 

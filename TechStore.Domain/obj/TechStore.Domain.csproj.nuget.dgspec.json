@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {}
+    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj": {}
   },
   "projects": {
-    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
+    "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
+        "projectUniqueName": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj",
         "projectName": "TechStore.Domain",
-        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj",
+        "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/TechStore.Domain.csproj",
         "packagesPath": "/Users/eros/.nuget/packages/",
-        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/obj/",
+        "outputPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/eros/.nuget/NuGet/NuGet.Config"

@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TechStore.Infrastructure.Data;
 using TechStore.Domain.Entities;
+using TechStore.Application.Interfaces;
+
 
 namespace TechStore.Controllers
 {
@@ -9,28 +11,31 @@ namespace TechStore.Controllers
     [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
-        private readonly ECommerceTechContext _context;
+        private readonly ICategoryService _service;
 
-        public CategoriesController(ECommerceTechContext context)
+        // O ASP.NET injeta o service automaticamente aqui
+        public CategoriesController(ICategoryService service)
         {
-            _context = context;
+            _service = service;
         }
 
-        // GET: api/categorias
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryTb>>> GetAll()
+        [HttpGet("allCategories")]
+        public async Task<ActionResult<IEnumerable<CategoryResponseDto>>> GetAll()
         {
-            return await _context.CategoryTbs.ToListAsync();
+            var categories = await _service.GetAllAsync();
+            return Ok(categories);
         }
 
-        // POST: api/categorias
-        [HttpPost]
-        public async Task<ActionResult<CategoryTb>> Create(CategoryTb category)
+        [HttpPost("addCategories")]
+        public async Task<ActionResult<CategoryResponseDto>> Create([FromBody] CategoryCreateDto dto)
         {
-            _context.CategoryTbs.Add(category);
-            await _context.SaveChangesAsync();
+            var category = await _service.AddCategoryAsync(dto);
 
-            return CreatedAtAction(nameof(GetAll), new { id = category.IdCategory }, category);
+            return Ok(new 
+                { 
+                    message = "Categoria criada com sucesso!", 
+                    data = category 
+                });    
         }
     }
 }

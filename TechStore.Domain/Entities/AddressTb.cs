@@ -16,6 +16,7 @@ public partial class AddressTb
     public string? CityAddress { get; set; }
 
     public string? StateAddress { get; set; }
+    public string Cep { get; set; }
 
     public string? TypeAddress { get; set; }
 

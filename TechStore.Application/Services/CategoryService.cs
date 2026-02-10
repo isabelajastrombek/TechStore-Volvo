@@ -18,4 +18,20 @@ public class CategoryService : ICategoryService
     {
         return await _context.CategoryTbs.ToListAsync();
     }
+
+    public async Task<CategoryResponseDto> AddCategoryAsync(CategoryCreateDto dto)
+    {
+        var category = new CategoryTb 
+        { 
+            NameCategory = dto.NameCategory
+        };
+
+        _context.CategoryTbs.Add(category);
+        await _context.SaveChangesAsync();
+
+        return new CategoryResponseDto(
+            category.IdCategory, 
+            category.NameCategory 
+        );
+    }
 }

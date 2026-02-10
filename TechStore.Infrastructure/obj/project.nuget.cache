@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y+J6pqPfFNg=",
+  "dgSpecHash": "/OzM8QZiBs0=",
   "success": true,
-  "projectFilePath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
+  "projectFilePath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvocopy/TechStore.Infrastructure/TechStore.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/eros/.nuget/packages/azure.core/1.47.1/azure.core.1.47.1.nupkg.sha512",
     "/Users/eros/.nuget/packages/azure.identity/1.14.2/azure.identity.1.14.2.nupkg.sha512",

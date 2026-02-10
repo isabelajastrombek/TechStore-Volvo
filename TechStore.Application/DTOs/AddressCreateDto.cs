@@ -9,5 +9,6 @@ public class AddressCreateDto
     public string CityAddress { get; set; }
     public string StateAddress { get; set; }
     public string TypeAddress { get; set; }
+    public string CepAddress { get; set; }
 
 }

@@ -12,6 +12,9 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IEncryptionService, EncryptionService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddHttpClient<IShippingService, ShippingService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddDbContext<ECommerceTechContext>(options =>
     options.UseSqlServer(
