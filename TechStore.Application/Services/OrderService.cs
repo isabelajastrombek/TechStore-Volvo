@@ -80,7 +80,6 @@ public class OrderService : IOrderService
         }
     }
 
-    // ✅ ESTE É O GetAllAsync CORRETO (DTO)
     public async Task<IEnumerable<OrderSummaryDto>> GetAllAsync()
     {
         return await _context.OrderTbs

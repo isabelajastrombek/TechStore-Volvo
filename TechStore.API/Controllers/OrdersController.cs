@@ -7,38 +7,72 @@ namespace TechStore.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PedidosController : ControllerBase
+public class OrdersController : ControllerBase
 {
     private readonly IOrderService _service;
 
-    public PedidosController(IOrderService service)
+    public OrdersController(IOrderService service)
     {
         _service = service;
     }
 
+    // POST: api/pedidos
     [HttpPost]
-    public async Task<IActionResult> Create(CreateOrderDto dto)
+    public async Task<IActionResult> CreateOrder([FromBody] CreateOrderDto dto)
     {
-        var orderId = await _service.CreateOrderAsync(dto);
-        return CreatedAtAction(nameof(GetById), new { id = orderId }, orderId);
+        try
+        {
+            var orderId = await _service.CreateOrderAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { id = orderId }, orderId);
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (BusinessRuleException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
+    // GET: api/pedidos
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<OrderSummaryDto>>> GetAll()
     {
-        return Ok(await _service.GetAllAsync());
+        var orders = await _service.GetAllAsync();
+        return Ok(orders);
     }
 
+    // GET: api/pedidos/{id}
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<ActionResult<OrderDetailsDto>> GetById(int id)
     {
-        return Ok(await _service.GetByIdAsync(id));
+        try
+        {
+            var order = await _service.GetByIdAsync(id);
+            return Ok(order);
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
 
+    // PATCH: api/pedidos/{id}/status
     [HttpPatch("{id}/status")]
-    public async Task<IActionResult> UpdateStatus(int id, UpdateOrderStatusDto dto)
+    public async Task<IActionResult> UpdateStatus(
+        int id,
+        [FromBody] UpdateOrderStatusDto dto
+    )
     {
-        await _service.UpdateStatusAsync(id, dto.Status);
-        return NoContent();
+        try
+        {
+            await _service.UpdateStatusAsync(id, dto.Status);
+            return NoContent();
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
 }
