@@ -25,6 +25,7 @@ CREATE TABLE Client.Address_tb(
     ComplementAddress VARCHAR(20),
     CityAddress VARCHAR(60),
     StateAddress VARCHAR(2),
+    Cep VARCHAR(10),
     TypeAddress VARCHAR(20),
     IdClient INT NOT NULL,
     CONSTRAINT FK_Address_Client FOREIGN KEY (IdClient) REFERENCES Client.Client_tb(IdClient)
