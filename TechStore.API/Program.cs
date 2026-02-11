@@ -6,6 +6,10 @@ using TechStore.Application.Services.Security;
 using System.Net.Http.Headers;
 using TechStore.Application.Settings;
 using Microsoft.Extensions.Options;
+using System.Globalization;
+
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 
 var builder = WebApplication.CreateBuilder(args);

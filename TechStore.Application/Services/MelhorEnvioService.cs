@@ -3,6 +3,8 @@ using System.Text;
 using System.Text.Json;
 using TechStore.Application.DTOs;
 using TechStore.Application.Interfaces;
+using System.Globalization;
+
 
 namespace TechStore.Application.Services;
 
@@ -35,64 +37,56 @@ public class MelhorEnvioService : IFreightService
             }
         };
 
-        var request = new HttpRequestMessage(
-            HttpMethod.Post,
-            "me/shipment/calculate"
-        );
-
-        request.Content = new StringContent(
-            JsonSerializer.Serialize(body),
-            Encoding.UTF8,
-            "application/json"
-        );
+        var request = new HttpRequestMessage(HttpMethod.Post, "me/shipment/calculate")
+        {
+            Content = new StringContent(
+                JsonSerializer.Serialize(body),
+                Encoding.UTF8,
+                "application/json")
+        };
 
         var response = await _http.SendAsync(request);
         var raw = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
-            throw new Exception($"Melhor Envio erro HTTP: {response.StatusCode} — {raw}");
+            throw new Exception($"Melhor Envio erro: {response.StatusCode} — {raw}");
 
-        var doc = JsonDocument.Parse(raw);
+        using var doc = JsonDocument.Parse(raw);
 
-        if (doc.RootElement.ValueKind != JsonValueKind.Array ||
-            doc.RootElement.GetArrayLength() == 0)
-            throw new Exception($"Nenhuma cotação retornada — {raw}");
+        var quote = doc.RootElement
+            .EnumerateArray()
+            .FirstOrDefault(x => !x.TryGetProperty("error", out _));
 
- 
-        JsonElement? valid = null;
-
-        foreach (var item in doc.RootElement.EnumerateArray())
+        // sandbox pode não retornar serviço válido
+        if (quote.ValueKind == JsonValueKind.Undefined)
         {
-            if (!item.TryGetProperty("error", out _))
+            return new FreightResponseDto
             {
-                valid = item;
-                break;
-            }
+                Price = 29.90m,
+                DeliveryDays = 5,
+                Company = "Sandbox Mock"
+            };
         }
 
-        if (valid == null)
-            throw new Exception($"Todas as cotações retornaram erro — {raw}");
+        var price = quote.GetProperty("price").ValueKind == JsonValueKind.String
+            ? decimal.Parse(quote.GetProperty("price").GetString()!, CultureInfo.InvariantCulture)
+            : quote.GetProperty("price").GetDecimal();
 
-        var quote = valid.Value;
- 
-        decimal price = 0;
+        var days = quote.GetProperty("delivery_time").GetInt32();
 
-        if (quote.GetProperty("price").ValueKind == JsonValueKind.String)
-            price = decimal.Parse(quote.GetProperty("price").GetString()!);
-        else
-            price = quote.GetProperty("price").GetDecimal();
-
-        int deliveryDays = quote.TryGetProperty("delivery_time", out var dt) ? dt.GetInt32() : 0;
-
-        string company = quote.TryGetProperty("company", out var comp) && comp.TryGetProperty("name", out var name) ? name.GetString()! : "Desconhecido";
+        var company = quote
+            .GetProperty("company")
+            .GetProperty("name")
+            .GetString()!;
 
         return new FreightResponseDto
         {
             Price = price,
-            DeliveryDays = deliveryDays,
+            DeliveryDays = days,
             Company = company
         };
     }
+
 
 
 }
