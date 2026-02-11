@@ -1,5 +1,5 @@
 public class CepResponseDto
 {
-    public string State { get; set; }
-    public string City { get; set; }
+    public required string State { get; set; }
+    public required string City { get; set; }
 }

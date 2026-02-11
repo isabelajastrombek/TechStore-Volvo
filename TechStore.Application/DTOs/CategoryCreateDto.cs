@@ -1,5 +1,5 @@
 public class CategoryCreateDto
 {
-    public string NameCategory { get; set;}
+    public required string NameCategory { get; set;}
    
 }

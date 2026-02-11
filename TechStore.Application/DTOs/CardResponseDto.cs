@@ -1,11 +1,11 @@
 public class CardResponseDto
 {
     public int IdCard { get; set;}
-    public string MaskedNumber { get; set;}
-    public string CpfCard { get; set;}
-    public string NicknameCard { get; set;}
+    public required string MaskedNumber { get; set;}
+    public required string CpfCard { get; set;}
+    public string NicknameCard { get; set;} = string.Empty;
     
-    public string PaymentToken { get; set;}
-    public string ExpDateCard {get; set;}
+    public required string PaymentToken { get; set;}
+    public required string ExpDateCard {get; set;}
 
 }
