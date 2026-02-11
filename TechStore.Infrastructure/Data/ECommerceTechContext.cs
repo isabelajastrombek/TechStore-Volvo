@@ -30,7 +30,10 @@ public partial class ECommerceTechContext : DbContext
     public virtual DbSet<OrderTb> OrderTbs { get; set; }
 
     public virtual DbSet<ProductTb> ProductTbs { get; set; }
+
     public virtual DbSet<CouponTb> CouponTbs { get; set; }
+
+    
 
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -176,11 +179,6 @@ public partial class ECommerceTechContext : DbContext
             entity.HasOne(d => d.IdClientNavigation).WithMany(p => p.OrderTbs)
                 .HasForeignKey(d => d.IdClient)
                 .HasConstraintName("FK_Order_Client");
-
-            entity.HasOne(d => d.IdCouponNavigation)
-                .WithMany() 
-                .HasForeignKey(d => d.IdCoupon) 
-                .HasConstraintName("FK_Order_Coupon");
         });
 
         modelBuilder.Entity<ProductTb>(entity =>
@@ -208,21 +206,24 @@ public partial class ECommerceTechContext : DbContext
 
         modelBuilder.Entity<CouponTb>(entity =>
         {
-            entity.HasKey(e => e.IdCoupon);
+            entity.HasKey(e => e.IdCoupon).HasName("PK_Coupon");
 
             entity.ToTable("Coupon_tb", "Sales");
 
             entity.Property(e => e.Code)
-                .IsRequired()
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             entity.Property(e => e.DiscountPercentage)
-                .HasColumnType("decimal(5, 2)");
+                .HasColumnType("decimal(5,2)");
+
+            entity.Property(e => e.ExpirationDate)
+                .HasColumnType("datetime");
 
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("((1))");
+                .HasColumnType("bit");
         });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

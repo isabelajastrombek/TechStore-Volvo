@@ -81,31 +81,40 @@ CREATE TABLE Sales.Card_tb(
 );
 GO
 
+
 CREATE TABLE Sales.Coupon_tb (
     IdCoupon INT PRIMARY KEY IDENTITY(1,1),
     Code VARCHAR(20) NOT NULL UNIQUE,
-    DiscountPercentage DECIMAL(5,2) NOT NULL,
+    DiscountPercentage DECIMAL(5,2) NULL,
     ExpirationDate DATETIME2 NOT NULL,
-    IsActive BIT DEFAULT 1
+    IsActive BIT NOT NULL DEFAULT 1
 );
 GO
 
 CREATE TABLE Sales.Order_tb(
     IdOrder INT PRIMARY KEY IDENTITY(1,1),
-    DateOrder DATETIME2 DEFAULT GETDATE(),
-    IdClient INT,
-    StatusOrder VARCHAR(50),
+    DateOrder DATETIME2 NOT NULL DEFAULT GETDATE(),
+    IdClient INT NOT NULL,
+    StatusOrder VARCHAR(50) NOT NULL,
     DeliveryDate DATE,
-    idCard INT,
-    idAddress INT,
-    IdCoupon INT NULL
-    TotalPrice MONEY,
-    TotalShipping MONEY,
+    IdCard INT NOT NULL,
+    IdAddress INT NOT NULL,
+    IdCoupon INT NULL,
+    TotalPrice MONEY NOT NULL,
+    TotalShipping MONEY NOT NULL,
+    ShippingCompany VARCHAR(100),
+    ShippingDeliveryDays INT,
+
     CONSTRAINT FK_Order_Client FOREIGN KEY (IdClient) REFERENCES Client.Client_tb(IdClient),
     CONSTRAINT FK_Order_Address FOREIGN KEY (IdAddress) REFERENCES Client.Address_tb(IdAddress),
-    CONSTRAINT FK_Order_Card FOREIGN KEY (IdCard) REFERENCES Sales.Card_tb(IdCard)
-    CONSTRAINT FK_Order_Coupon FOREIGN KEY (IdCoupon) REFERENCES Sales.Coupon_tb(IdCoupon);
+    CONSTRAINT FK_Order_Card FOREIGN KEY (IdCard) REFERENCES Sales.Card_tb(IdCard),
+    CONSTRAINT FK_Order_Coupon FOREIGN KEY (IdCoupon) REFERENCES Sales.Coupon_tb(IdCoupon)
 );
+GO
+
+ALTER TABLE Sales.Order_tb
+ADD ShippingCompany VARCHAR(100) NULL,
+    ShippingDeliveryDays INT NULL;
 GO
 
 CREATE TABLE Sales.ItemOrder_tb(
@@ -118,11 +127,4 @@ CREATE TABLE Sales.ItemOrder_tb(
     CONSTRAINT FK_Item_Product FOREIGN KEY (IdProduct) REFERENCES Catalog.Product_tb(IdProduct)
 );
 GO
-
-
-
-
-FROM Catalog.Product_tb SELECT *;
-
-
 

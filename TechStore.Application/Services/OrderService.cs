@@ -2,19 +2,22 @@ using Microsoft.EntityFrameworkCore;
 using TechStore.Application.Interfaces;
 using TechStore.Domain.Entities;
 using TechStore.Infrastructure.Data;
+using TechStore.Application.DTOs;
+
 
 namespace TechStore.Application.Services;
 
 public class OrderService : IOrderService
 {
     private readonly ECommerceTechContext _context;
-    private readonly IShippingService _shippingService; 
+    private readonly IFreightService _freightService;
 
-    public OrderService(ECommerceTechContext context, IShippingService shippingService)
+    public OrderService(ECommerceTechContext context, IFreightService freightService)
     {
         _context = context;
-        _shippingService = shippingService;
+        _freightService = freightService;
     }
+
 
     public async Task<bool> CreateOrderAsync(OrderCreateDto dto)
     {
@@ -33,7 +36,21 @@ public class OrderService : IOrderService
         }
 
         // calculamos frete
-        decimal shippingFee = await _shippingService.CalculateShippingAsync(address.Cep, totalWeight);
+        var freightRequest = new FreightRequestDto
+        {
+            FromZipCode = "80215901", 
+            ToZipCode = address.Cep,
+            WeightKg = totalWeight,
+            Width = 20,
+            Height = 15,
+            Length = 25,
+            Quantity = 1
+        };
+
+        var freightResponse = await _freightService.CalculateAsync(freightRequest);
+
+        decimal shippingFee = freightResponse.Price;
+
 
         using var transaction = await _context.Database.BeginTransactionAsync(); 
         try
@@ -46,6 +63,8 @@ public class OrderService : IOrderService
                 DateOrder = DateTime.Now,
                 StatusOrder = "Pendente",
                 TotalShipping = shippingFee,
+                ShippingCompany = freightResponse.Company,
+                ShippingDeliveryDays = freightResponse.DeliveryDays,
                 TotalPrice = 0 
             };
 
@@ -158,10 +177,5 @@ public class OrderService : IOrderService
         order.StatusOrder = status;
         await _context.SaveChangesAsync();
     }
-
-
-
-
-
 
 }
