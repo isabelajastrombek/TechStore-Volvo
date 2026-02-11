@@ -49,7 +49,21 @@ public class AuthController : ControllerBase
     [HttpGet("users")]
     public async Task<IActionResult> GetUsers()
     {
-        var Clients = await _authService.GetAllAsync();
-        return Ok(Clients);
+        try
+        {
+            var users = await _authService.GetAllAsync();
+
+            if (users == null)
+            {
+                return NotFound("Nenhum cliente cadastrado.");
+            }
+
+            return Ok(users);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Erro ao listar clientes: " + ex.Message);
+            return StatusCode(500, "Ocorreu um erro interno ao processar a lista de clientes.");
+        }
     }
 }

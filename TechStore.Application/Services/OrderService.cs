@@ -148,6 +148,17 @@ public class OrderService : IOrderService
     return orders;
 }
 
+    public async Task UpdateStatusAsync(int orderId, string status)
+    {
+        var order = await _context.OrderTbs.FindAsync(orderId);
+
+        if (order == null)
+            throw new NotFoundException("Order not found");
+
+        order.StatusOrder = status;
+        await _context.SaveChangesAsync();
+    }
+
 
 
 

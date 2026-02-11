@@ -23,7 +23,19 @@ public class AuthService : IAuthService
 
     public async Task<IEnumerable<ClientTb>> GetAllAsync()
     {
-        return await _context.ClientTbs.ToListAsync();
+        var clients = await _context.ClientTbs.AsNoTracking().ToListAsync();
+
+        foreach (var c in clients)
+        {
+            if (c.CpfClient != null)
+            {
+                string realCPF = _encryptionService.Decrypt(c.CpfClient);
+                
+                c.CpfClient = realCPF;
+            }
+        }
+
+        return clients;
     }
 
     public async Task<bool> RegisterAsync(SignUpDto signUp)

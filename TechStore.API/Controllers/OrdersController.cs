@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TechStore.Application.DTOs;
 using TechStore.Application.Interfaces;
+using TechStore.Application.Exceptions;
 
 namespace TechStore.API.Controllers;
 
@@ -56,5 +57,23 @@ public class OrderController : ControllerBase
             return NotFound("Nenhum pedido encontrado para este cliente.");
 
         return Ok(history);
+    }
+
+
+    [HttpPatch("{id}/status")]
+    public async Task<IActionResult> UpdateStatus(
+        int id,
+        [FromBody] UpdateOrderStatusDto dto
+    )
+    {
+        try
+        {
+            await _orderService.UpdateStatusAsync(id, dto.Status);
+            return NoContent();
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
 }
