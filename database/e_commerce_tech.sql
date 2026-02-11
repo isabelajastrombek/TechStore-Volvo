@@ -50,7 +50,7 @@ CREATE TABLE Catalog.Product_tb(
     StockProduct INT NOT NULL DEFAULT 0,
     IdCategory INT NOT NULL,
     DescriptionProduct VARCHAR(500),
-    WeightProduct INTEGER,
+    WeightProduct DECIMAL(10, 3),
     SpecsProduct NVARCHAR(MAX),
     BrandProduct VARCHAR(50),
     CONSTRAINT FK_Product_Category FOREIGN KEY (IdCategory) REFERENCES Catalog.Category_tb(IdCategory),
