@@ -29,18 +29,21 @@ builder.Services.Configure<MelhorEnvioSettings>(
     builder.Configuration.GetSection("MelhorEnvio")
 );
 
-builder.Services.AddHttpClient<IFreightService, MelhorEnvioService>((sp, client) =>
+builder.Services.AddHttpClient<IFreightService, MelhorEnvioService>(client =>
 {
-    var settings = sp.GetRequiredService<IOptions<MelhorEnvioSettings>>().Value;
+    client.BaseAddress = new Uri("https://sandbox.melhorenvio.com.br/api/v2/");
 
-    client.BaseAddress = new Uri(settings.BaseUrl);
     client.DefaultRequestHeaders.Authorization =
-        new AuthenticationHeaderValue("Bearer", settings.Token);
+        new AuthenticationHeaderValue(
+            "Bearer",
+            builder.Configuration["MelhorEnvio:Token"]);
 
     client.DefaultRequestHeaders.Accept.Add(
-        new MediaTypeWithQualityHeaderValue("application/json")
-    );
+        new MediaTypeWithQualityHeaderValue("application/json"));
+
+    client.DefaultRequestHeaders.Add("User-Agent", "TechStore");
 });
+
 
 
 

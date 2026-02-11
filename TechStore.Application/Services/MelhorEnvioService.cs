@@ -29,34 +29,70 @@ public class MelhorEnvioService : IFreightService
                     width = 15,
                     height = 10,
                     length = 20,
-                    quantity = 1
+                    quantity = 1,
+                    insurance_value = 100
                 }
             }
         };
 
-        var request = new HttpRequestMessage(HttpMethod.Post, "api/v2/me/shipment/calculate");
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "me/shipment/calculate"
+        );
+
         request.Content = new StringContent(
             JsonSerializer.Serialize(body),
             Encoding.UTF8,
             "application/json"
         );
 
-        request.Headers.Authorization =
-            new AuthenticationHeaderValue("Bearer", "SEU_TOKEN_AQUI");
-
         var response = await _http.SendAsync(request);
-        response.EnsureSuccessStatusCode();
+        var raw = await response.Content.ReadAsStringAsync();
 
-        var json = await response.Content.ReadAsStringAsync();
-        var data = JsonDocument.Parse(json);
+        if (!response.IsSuccessStatusCode)
+            throw new Exception($"Melhor Envio erro HTTP: {response.StatusCode} — {raw}");
 
-        var cheapest = data.RootElement[0];
+        var doc = JsonDocument.Parse(raw);
+
+        if (doc.RootElement.ValueKind != JsonValueKind.Array ||
+            doc.RootElement.GetArrayLength() == 0)
+            throw new Exception($"Nenhuma cotação retornada — {raw}");
+
+ 
+        JsonElement? valid = null;
+
+        foreach (var item in doc.RootElement.EnumerateArray())
+        {
+            if (!item.TryGetProperty("error", out _))
+            {
+                valid = item;
+                break;
+            }
+        }
+
+        if (valid == null)
+            throw new Exception($"Todas as cotações retornaram erro — {raw}");
+
+        var quote = valid.Value;
+ 
+        decimal price = 0;
+
+        if (quote.GetProperty("price").ValueKind == JsonValueKind.String)
+            price = decimal.Parse(quote.GetProperty("price").GetString()!);
+        else
+            price = quote.GetProperty("price").GetDecimal();
+
+        int deliveryDays = quote.TryGetProperty("delivery_time", out var dt) ? dt.GetInt32() : 0;
+
+        string company = quote.TryGetProperty("company", out var comp) && comp.TryGetProperty("name", out var name) ? name.GetString()! : "Desconhecido";
 
         return new FreightResponseDto
         {
-            Price = cheapest.GetProperty("price").GetDecimal(),
-            DeliveryDays = cheapest.GetProperty("delivery_time").GetInt32(),
-            Company = cheapest.GetProperty("company").GetProperty("name").GetString()!
+            Price = price,
+            DeliveryDays = deliveryDays,
+            Company = company
         };
     }
+
+
 }
