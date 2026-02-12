@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechStore.Domain.Entities;
 
@@ -23,11 +24,12 @@ public partial class OrderTb
 
     public decimal? TotalShipping { get; set; }
     public int? IdCoupon { get; set; } 
+    [ForeignKey("IdCoupon")] 
+    public virtual CouponTb? IdCouponNavigation { get; set; }
     public string? ShippingCompany { get; set; }
 
     public int? ShippingDeliveryDays { get; set; }
 
-    public virtual CouponTb IdCouponNavigation { get; set;}
 
     public virtual AddressTb? IdAddressNavigation { get; set; }
 

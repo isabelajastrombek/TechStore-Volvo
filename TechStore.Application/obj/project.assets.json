@@ -696,13 +696,24 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
+      "TechStore.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/TechStore.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TechStore.Domain.dll": {}
+        }
+      },
       "TechStore.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
           "Microsoft.EntityFrameworkCore": "10.0.2",
-          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.2"
+          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.2",
+          "TechStore.Domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/TechStore.Infrastructure.dll": {}
@@ -1726,6 +1737,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "TechStore.Domain/1.0.0": {
+      "type": "project",
+      "path": "../TechStore.Domain/TechStore.Domain.csproj",
+      "msbuildProject": "../TechStore.Domain/TechStore.Domain.csproj"
+    },
     "TechStore.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../TechStore.Infrastructure/TechStore.Infrastructure.csproj",
@@ -1736,6 +1752,7 @@
     "net10.0": [
       "Microsoft.EntityFrameworkCore >= 10.0.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 10.0.2",
+      "TechStore.Domain >= 1.0.0",
       "TechStore.Infrastructure >= 1.0.0"
     ]
   },
@@ -1764,6 +1781,9 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
+            "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj": {
+              "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Domain/TechStore.Domain.csproj"
+            },
             "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj": {
               "projectPath": "/Users/eros/Desktop/CursoEstagioVolvo/TechStore-Volvo/TechStore.Infrastructure/TechStore.Infrastructure.csproj"
             }

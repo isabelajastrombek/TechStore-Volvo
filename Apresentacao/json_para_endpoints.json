@@ -1,0 +1,74 @@
+
+
+// Inserir produto
+{
+  "name": "Notebook Alienware m16 R2",
+  "price": 14599.00,
+  "stock": 3,
+  "idCategory": 1,
+  "description": "Notebook gamer de alta performance com resfriamento avançado e teclado mecânico CherryMX.",
+  "brand": "Dell",
+  "specs": "{\"Processor\": \"Intel Core i9-14900HX\", \"GPU\": \"NVIDIA RTX 4080 12GB\", \"RAM\": \"32GB DDR5\", \"Screen\": \"16 QHD+ 240Hz\"}"
+}
+
+
+
+// Cadastrar Cliente
+
+{
+  "cpfClient": "98765432100",
+  "nameClient": "Isabela Jastrombek",
+  "birthDateClient": "2000-08-15",
+  "phoneClient": "41988887777",
+  "emailClient": "isabela.j@email.com",
+  "passwordClient": "VolvoTech@2026"
+}
+
+
+
+// Cadastrar Endereço
+
+{
+  "clientId": ,
+  "streetAddress": "Avenida Sete de Setembro",
+  "numberAddress": "2775",
+  "complementAddress": "Shopping Estação - Loja 10",
+  "cityAddress": "Curitiba",
+  "stateAddress": "PR",
+  "typeAddress": "Comercial",
+  "cepAddress": "80230010"
+}
+
+
+// Cadastrar Cartão
+
+{
+  "clientId": ,
+  "expDateCard": "05/30",
+  "fullNumber": "5432666677778888",
+  "cpf": "12345678901",
+  "cvv": "999",
+  "nameOnCard": "EROS SILVA",
+  "typeCard": "Débito",
+  "nicknameCard": "Inter Eros"
+}
+
+
+// Fazer pedido
+{
+  "clientId": 1002,
+  "cardId": 2,
+  "addressId": 2,
+  "couponCode": "BEMVINDO10",
+  "items": [
+    {
+      "productId": 11,
+      "quantity": 1
+    },
+    {
+      "productId": 12,
+      "quantity": 1
+    }
+  ]
+}
+
