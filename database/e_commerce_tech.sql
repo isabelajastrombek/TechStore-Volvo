@@ -112,10 +112,6 @@ CREATE TABLE Sales.Order_tb(
 );
 GO
 
-ALTER TABLE Sales.Order_tb
-ADD ShippingCompany VARCHAR(100) NULL,
-    ShippingDeliveryDays INT NULL;
-GO
 
 CREATE TABLE Sales.ItemOrder_tb(
     IdItemOrder INT PRIMARY KEY IDENTITY(1,1),
