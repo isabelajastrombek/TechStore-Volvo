@@ -72,12 +72,6 @@ VALUES
 GO
 
 
-ALTER TABLE Catalog.Product_tb ALTER COLUMN WeightProduct DECIMAL(18,2);
-
-ALTER TABLE Sales.Card_tb ALTER COLUMN NicknameCard VARCHAR(100);
-
-
-
 INSERT INTO Sales.Coupon_tb (Code, DiscountPercentage, ExpirationDate, IsActive)
 VALUES 
 ('BEMVINDO10', 10.00, '2026-12-31 23:59:59', 1), -- Cupom de boas-vindas
