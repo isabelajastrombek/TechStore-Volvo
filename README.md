@@ -47,6 +47,8 @@ Responsável pelo DbContext, Repositories e Mapeamentos do Entity Framework.
 
 ## Modelagem do Banco de Dados
 
+![](images/DiagramaDeClasses.jpeg)
+
 ### Diagrama ER
 
 Salvar o diagrama dentro do repositório e referenciar aqui. Exemplo:
